@@ -52,6 +52,28 @@ public class MyPortfolio {
                 <li>Class XII - Andhra Pradesh State Board of Intermediate Education (2023)</li>
                 <li>Class X - Andhra Pradesh State Board of Secondary Education (2021)</li>
             </ul>
+            <h1>Projects</h1>
+            <ul>
+                <li>
+                    <strong>Hybrid DevSecOps CI/CD Pipeline</strong><br>
+                    Built a secure CI/CD pipeline using GitHub Actions, Jenkins, Docker, Maven, and SonarQube with automated build, testing, security scanning, and deployment.
+                </li>
+                <br>
+                <li>
+                    <strong>Weather Forecast Web Application</strong><br>
+                    Developed a full-stack weather application using React.js, Node.js, Express.js, and the OpenWeatherMap API to display real-time weather information.
+                </li>
+                <br>
+                <li>
+                    <strong>AI Chatbot - Ghost Story Folklore Analyzer</strong><br>
+                    Created an AI-powered chatbot using Python and Natural Language Processing (NLP) to analyze and classify ghost stories based on folklore themes.
+                </li>
+                <br>
+                <li>
+                    <strong>AI-Based Keylogger (Educational Project)</strong><br>
+                    Developed a Python-based educational keylogger integrated with AI techniques to analyze typing patterns and demonstrate cybersecurity concepts in a controlled environment.
+                </li>
+            </ul>
             """;
 
 }
