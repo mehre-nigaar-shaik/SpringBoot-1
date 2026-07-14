@@ -1,4 +1,4 @@
-package com.Mehre.demo;
+package com.Mehre.demo.Java;
 
 class p {
 void m1(){
