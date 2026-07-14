@@ -9,17 +9,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class StudentServer {
     //store the stud info , read the stud info with id, update the stud info, delete the stud info from the db
 
-@PostMapping("/create")
-public String storeStudent(@RequestBody Student student) {
+//@PostMapping("/create")
+//public String storeStudent(@RequestBody Student student) {
 
-    int id = student.getId();
-    String name = student.getName();
-    int age = student.getAge();
-    String dept = student.getDept();
+    //  int id = student.getId();
+    //String name = student.getName();
+    //   int age = student.getAge();
+    // String dept = student.getDept();
 
-    return  "id: " +id +
-            "name:" +name +
-            "Dept:"  +dept +
-            "age:" + age;
-}
+    //  return  "id: " +id +
+    //           "name:" +name +
+    //         "Dept:"  +dept +
+    //       "age:" + age;
+//}
 }
