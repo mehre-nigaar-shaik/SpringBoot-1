@@ -46,6 +46,12 @@ public class MyPortfolio {
                 <li>Wireshark</li>
                 <li>Metasploit</li>
             </ul>
+            <h1>Education</h1>
+            <ul>
+                <li>B.Tech in Computer Science and Engineering - Lovely Professional University (2023 - 2027) | CGPA: 6.67</li>
+                <li>Class XII - Andhra Pradesh State Board of Intermediate Education (2023)</li>
+                <li>Class X - Andhra Pradesh State Board of Secondary Education (2021)</li>
+            </ul>
             """;
 
 }
