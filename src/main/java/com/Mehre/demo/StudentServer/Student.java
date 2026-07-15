@@ -1,16 +1,36 @@
 package com.Mehre.demo.StudentServer;
 
-public class Student {
-    int id;
-    String name;
-    int age;
-    String dept;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 
-    public int getId() {
+@Entity
+public class Student {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+    private int age;
+    private String dept;
+
+    public Student() {
+    }
+
+    public Student(Long id, String name, int age, String dept) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.dept = dept;
+    }
+
+    public Long getId() {     // ✅ Changed from int to Long
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

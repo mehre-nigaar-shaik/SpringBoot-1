@@ -1,12 +1,12 @@
 package com.Mehre.demo.StudentServer;
 
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.RestController;
-@Repository
-public class StudentRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
 
-    public Student save(Student student) {
-        System.out.println("Student Information saved");
-        return student;
-    }
+public interface StudentRepository extends JpaRepository<Student,Integer> {
+
+ //   public Student save(Student student) {
+   //     System.out.println("Student Information saved");
+     //   return student;
+    //}
 }
