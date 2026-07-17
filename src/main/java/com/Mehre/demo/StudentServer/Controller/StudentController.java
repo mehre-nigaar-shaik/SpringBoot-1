@@ -1,5 +1,7 @@
-package com.Mehre.demo.StudentServer;
+package com.Mehre.demo.StudentServer.Controller;
 
+import com.Mehre.demo.StudentServer.Entity.Student;
+import com.Mehre.demo.StudentServer.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,4 +26,6 @@ public class StudentController {
         }
         return ResponseEntity.status(201).body(result);
     }
+
+
 }

@@ -1,5 +1,7 @@
-package com.Mehre.demo.StudentServer;
+package com.Mehre.demo.StudentServer.Service;
 
+import com.Mehre.demo.StudentServer.Entity.Student;
+import com.Mehre.demo.StudentServer.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

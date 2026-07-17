@@ -1,4 +1,4 @@
-package com.Mehre.demo.StudentServer;
+package com.Mehre.demo.StudentServer.Entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
