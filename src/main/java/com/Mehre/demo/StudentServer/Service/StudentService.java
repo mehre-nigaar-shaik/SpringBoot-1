@@ -9,8 +9,7 @@ import java.time.LocalDateTime;
 
 @Service
 public class StudentService {
-
-    private final StudentRepository studentRepository;
+    StudentRepository studentRepository;
 
     @Autowired
     public StudentService(StudentRepository studentRepository) {
@@ -28,6 +27,10 @@ public class StudentService {
                 || age <= 0 || department == null || department.isBlank()) {
             return null;
         }
+//        if (id <= 0 || name == null || name.isBlank()
+//                || age <= 0 || department == null || department.isBlank()) {
+//            return null;
+//        }
 
         student.setCreatedAt(LocalDateTime.now());
         student.setUpdatedAt(LocalDateTime.now());
@@ -56,13 +59,10 @@ public class StudentService {
     }
 
     public Student deleteStudent(int id) {
-
         Student result = studentRepository.findById(id).orElse(null);
-
         if (result == null) {
             return null;
         }
-
         studentRepository.delete(result);
         return result;
     }
