@@ -1,21 +1,25 @@
 package com.Mehre.demo.StudentServer.Exception;
 
+import com.Mehre.demo.StudentServer.DTO.ExceptionResponseDTO;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
+import java.time.LocalDateTime;
+
 @RestControllerAdvice
 public class GlobalException {
 
     // Handle Runtime Exceptions
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<String> handleRuntimeException(RuntimeException e) {
-
+    public ResponseEntity<ExceptionResponseDTO> handleRuntimeException(RuntimeException e, HttpServletRequest req) {
+        ExceptionResponseDTO exceptionResponseDTO = new ExceptionResponseDTO(LocalDateTime.now(),HttpStatus.NOT_FOUND.value(),HttpStatus.NOT_FOUND.getReasonPhrase(), e.getMessage(), req.getRequestURI());
         return ResponseEntity
-                .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                .body(e.getMessage());
+                .status(500)
+                .body(exceptionResponseDTO);
     }
 
     // Handle Illegal Argument Exceptions
