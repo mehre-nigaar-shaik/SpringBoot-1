@@ -1,5 +1,7 @@
 package com.Mehre.demo.StudentServer.Controller;
 
+import com.Mehre.demo.StudentServer.DTO.CreateStudentRequestDTO;
+import com.Mehre.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.Mehre.demo.StudentServer.Entity.Student;
 import com.Mehre.demo.StudentServer.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,12 +19,14 @@ public class StudentController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> storeStudent(@RequestBody Student student) {
+    public ResponseEntity<?> storeStudent(
+            @RequestBody CreateStudentRequestDTO createStudentRequestDTO) {
 
-        Student result = studentService.studentValidate(student);
+        CreateStudentResponseDTO result =
+                studentService.studentValidate(createStudentRequestDTO);
 
         if (result == null) {
-            return ResponseEntity.status(400).body("Invalid input");
+            return ResponseEntity.badRequest().body("Invalid Input");
         }
 
         return ResponseEntity.status(201).body(result);
@@ -41,13 +45,14 @@ public class StudentController {
     }
 
     @PutMapping("/updateStudent/{id}")
-    public ResponseEntity<?> updateStudent(@PathVariable int id,
-                                           @RequestBody Student student) {
+    public ResponseEntity<?> updateStudent(
+            @PathVariable int id,
+            @RequestBody Student student) {
 
         Student result = studentService.studentUpdate(id, student);
 
         if (result == null) {
-            return ResponseEntity.status(400).body("Invalid input");
+            return ResponseEntity.badRequest().body("Invalid Input");
         }
 
         return ResponseEntity.ok(result);
@@ -62,6 +67,6 @@ public class StudentController {
             return ResponseEntity.status(404).body("Student not found");
         }
 
-        return ResponseEntity.ok("Student deleted");
+        return ResponseEntity.ok("Student Deleted");
     }
 }

@@ -1,5 +1,7 @@
 package com.Mehre.demo.StudentServer.Service;
 
+import com.Mehre.demo.StudentServer.DTO.CreateStudentRequestDTO;
+import com.Mehre.demo.StudentServer.DTO.CreateStudentResponseDTO;
 import com.Mehre.demo.StudentServer.Entity.Student;
 import com.Mehre.demo.StudentServer.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,33 +11,21 @@ import java.time.LocalDateTime;
 
 @Service
 public class StudentService {
-    StudentRepository studentRepository;
+
+    private final StudentRepository studentRepository;
 
     @Autowired
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
-    public Student studentValidate(Student student) {
+    public CreateStudentResponseDTO studentValidate(CreateStudentRequestDTO dto) {
 
-        int id = student.getId();
-        String name = student.getName();
-        int age = student.getAge();
-        String department = student.getDepartment();
+        Student student = mapToStudent(dto);
 
-        if (id <= 0 || name == null || name.isBlank()
-                || age <= 0 || department == null || department.isBlank()) {
-            return null;
-        }
-//        if (id <= 0 || name == null || name.isBlank()
-//                || age <= 0 || department == null || department.isBlank()) {
-//            return null;
-//        }
+        student = studentRepository.save(student);
 
-        student.setCreatedAt(LocalDateTime.now());
-        student.setUpdatedAt(LocalDateTime.now());
-
-        return studentRepository.save(student);
+        return mapToResponseDTO(student);
     }
 
     public Student getStudentById(int id) {
@@ -59,11 +49,41 @@ public class StudentService {
     }
 
     public Student deleteStudent(int id) {
+
         Student result = studentRepository.findById(id).orElse(null);
+
         if (result == null) {
             return null;
         }
+
         studentRepository.delete(result);
+
         return result;
+    }
+
+    private Student mapToStudent(CreateStudentRequestDTO dto) {
+
+        Student student = new Student();
+
+        student.setName(dto.getName());
+        student.setAge(dto.getAge());
+        student.setDepartment(dto.getDepartment());
+
+        student.setCreatedAt(LocalDateTime.now());
+        student.setUpdatedAt(LocalDateTime.now());
+
+        return student;
+    }
+
+    private CreateStudentResponseDTO mapToResponseDTO(Student student) {
+
+        CreateStudentResponseDTO dto = new CreateStudentResponseDTO();
+
+        dto.setId(student.getId());
+        dto.setName(student.getName());
+        dto.setAge(student.getAge());
+        dto.setDepartment(student.getDepartment());
+
+        return dto;
     }
 }
