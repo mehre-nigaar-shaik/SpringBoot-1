@@ -5,6 +5,8 @@ import com.Mehre.demo.StudentServer.Repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class StudentService {
 
@@ -17,45 +19,51 @@ public class StudentService {
 
     public Student studentValidate(Student student) {
 
+        int id = student.getId();
         String name = student.getName();
         int age = student.getAge();
-        String dept = student.getDept();
+        String department = student.getDepartment();
 
-        if (name == null || name.isBlank() ||
-                age < 0 ||
-                dept == null || dept.isBlank()) {
+        if (id <= 0 || name == null || name.isBlank()
+                || age <= 0 || department == null || department.isBlank()) {
             return null;
         }
+
+        student.setCreatedAt(LocalDateTime.now());
+        student.setUpdatedAt(LocalDateTime.now());
 
         return studentRepository.save(student);
     }
-    public Student getStudentById(int id){
+
+    public Student getStudentById(int id) {
         return studentRepository.findById(id).orElse(null);
     }
-    public Student updateStudent(int id, Student student) {
 
-        Student existingStudent = studentRepository.findById(id).orElse(null);
+    public Student studentUpdate(int id, Student student) {
 
-        if (existingStudent == null) {
+        Student result = studentRepository.findById(id).orElse(null);
+
+        if (result == null) {
             return null;
         }
 
-        existingStudent.setName(student.getName());
-        existingStudent.setAge(student.getAge());
-        existingStudent.setDept(student.getDept());
+        result.setName(student.getName());
+        result.setAge(student.getAge());
+        result.setDepartment(student.getDepartment());
+        result.setUpdatedAt(LocalDateTime.now());
 
-        return studentRepository.save(existingStudent);
+        return studentRepository.save(result);
     }
-    public boolean deleteStudent(int id) {
 
-        Student student = studentRepository.findById(id).orElse(null);
+    public Student deleteStudent(int id) {
 
-        if (student == null) {
-            return false;
+        Student result = studentRepository.findById(id).orElse(null);
+
+        if (result == null) {
+            return null;
         }
 
-        studentRepository.delete(student);
-
-        return true;
+        studentRepository.delete(result);
+        return result;
     }
 }

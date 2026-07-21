@@ -5,32 +5,43 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.time.LocalDateTime;
+
 @Entity
 public class Student {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     private String name;
     private int age;
-    private String dept;
+    private String department;
 
-    public Student() {
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
     }
 
-    public Student(Long id, String name, int age, String dept) {
-        this.id = id;
-        this.name = name;
-        this.age = age;
-        this.dept = dept;
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public Long getId() {     // ✅ Changed from int to Long
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -50,11 +61,11 @@ public class Student {
         this.age = age;
     }
 
-    public String getDept() {
-        return dept;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setDept(String dept) {
-        this.dept = dept;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }
