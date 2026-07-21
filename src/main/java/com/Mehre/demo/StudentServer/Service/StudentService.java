@@ -11,20 +11,17 @@ import java.time.LocalDateTime;
 
 @Service
 public class StudentService {
-
-    private final StudentRepository studentRepository;
+    StudentRepository studentRepository;
 
     @Autowired
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
 
-    public CreateStudentResponseDTO studentValidate(CreateStudentRequestDTO dto) {
+    public CreateStudentResponseDTO studentValidate(CreateStudentRequestDTO createStudentRequestDTO) {
 
-        Student student = mapToStudent(dto);
-
-        student = studentRepository.save(student);
-
+        Student student = mapToStudent(createStudentRequestDTO);
+        studentRepository.save(student);
         return mapToResponseDTO(student);
     }
 
@@ -49,26 +46,20 @@ public class StudentService {
     }
 
     public Student deleteStudent(int id) {
-
         Student result = studentRepository.findById(id).orElse(null);
-
         if (result == null) {
             return null;
         }
-
         studentRepository.delete(result);
-
         return result;
     }
 
-    private Student mapToStudent(CreateStudentRequestDTO dto) {
-
+    private Student mapToStudent(CreateStudentRequestDTO createStudentRequestDTO) {
         Student student = new Student();
 
-        student.setName(dto.getName());
-        student.setAge(dto.getAge());
-        student.setDepartment(dto.getDepartment());
-
+        student.setName(createStudentRequestDTO.getName());
+        student.setAge(createStudentRequestDTO.getAge());
+        student.setDepartment(createStudentRequestDTO.getDepartment());
         student.setCreatedAt(LocalDateTime.now());
         student.setUpdatedAt(LocalDateTime.now());
 
@@ -76,14 +67,13 @@ public class StudentService {
     }
 
     private CreateStudentResponseDTO mapToResponseDTO(Student student) {
+        CreateStudentResponseDTO createStudentResponseDTO = new CreateStudentResponseDTO();
+        createStudentResponseDTO.setId(student.getId());
+        createStudentResponseDTO.setName(student.getName());
+        createStudentResponseDTO.setAge(student.getAge());
+        createStudentResponseDTO.setDepartment(student.getDepartment());
 
-        CreateStudentResponseDTO dto = new CreateStudentResponseDTO();
+        return createStudentResponseDTO;
 
-        dto.setId(student.getId());
-        dto.setName(student.getName());
-        dto.setAge(student.getAge());
-        dto.setDepartment(student.getDepartment());
-
-        return dto;
     }
 }
